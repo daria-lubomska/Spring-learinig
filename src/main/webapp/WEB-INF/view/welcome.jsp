@@ -1,9 +1,10 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>welcome</title>
 </head>
 <body>
-    <h2>wellcome page</h2>
+    <h1>${helloMessage}</h1>
+    <h2>${welcomeMessage}</h2>
+    <h2>${ageParam}</h2>
 </body>
 </html>
