@@ -13,4 +13,10 @@ public class DemoController {
     return "hello";
   }
 
+  //ViewResolver prepare path : prefix + welcome (line 19) + suffix = /WEB-INF/view/welcome.jsp
+  @GetMapping("welcome")
+  public String welcome(){
+    return "welcome";
+  }
+
 }
