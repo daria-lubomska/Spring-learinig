@@ -5,6 +5,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -12,7 +14,7 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 @Configuration
 @ComponentScan(basePackages = "udemy.spring")
 
-public class AppConfig {
+public class WebMvcConfig implements WebMvcConfigurer {
 
   private static final String VIEW_RESOLVER_PREFIX = "/WEB-INF/view/";
   private static final String VIEW_RESOLVER_SUFFIX = ".jsp";
@@ -23,5 +25,12 @@ public class AppConfig {
     viewResolver.setPrefix(VIEW_RESOLVER_PREFIX);
     viewResolver.setSuffix(VIEW_RESOLVER_SUFFIX);
     return viewResolver;
+  }
+
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry
+        .addResourceHandler("/resources/**")
+        .addResourceLocations("/resources/");
   }
 }
