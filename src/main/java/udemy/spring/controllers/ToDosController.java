@@ -1,12 +1,10 @@
 package udemy.spring.controllers;
 
-import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,18 +41,23 @@ public class ToDosController {
   @GetMapping(Mappings.ADD_TODO_FORM)
   public String getAddForm(Model model){
     ToDo toDo = new ToDo();
-    model.addAttribute("newToDo", toDo);
+    model.addAttribute("todo", toDo);
     return ViewNames.ADD_FORM;
   }
 
   @GetMapping(Mappings.UPDATE_TODO_FORM)
   public String getUpdateForm(@RequestParam("todoId") long id, Model model){
-    model.addAttribute("toDoToUpdate", service.getToDoItem(id));
-    return ViewNames.UPDATE_FORM;
+    ToDo toDo = service.getToDoItem(id);
+    if (toDo==null){
+      toDo = new ToDo();
+    }
+    model.addAttribute("todo", toDo);
+    service.addToDoItem(toDo);
+    return ViewNames.ADD_FORM;
   }
 
   @PostMapping("save")
-  public String saveToDo(@ModelAttribute("newToDo")ToDo toDo){
+  public String saveToDo(@ModelAttribute("todo")ToDo toDo){
     service.addToDoItem(toDo);
     return ViewNames.REDIRECT;
   }

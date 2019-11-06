@@ -20,7 +20,7 @@
             </div>
             <div class="panel-body">
                 <form:form action="save" cssClass="form-horizontal"
-                           method="post" modelAttribute="newToDo">
+                           method="post" modelAttribute="todo">
 
                     <!-- need to associate this data with customer id -->
                     <form:hidden path="id" />
