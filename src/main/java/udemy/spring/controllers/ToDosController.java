@@ -50,13 +50,13 @@ public class ToDosController {
     return ViewNames.UPDATE_FORM;
   }
 
-  @PostMapping(Mappings.SAVE)
+  @PostMapping("save")
   public String saveToDo(ToDo toDo){
     service.addToDoItem(toDo);
     return ViewNames.REDIRECT;
   }
 
-  @PostMapping(Mappings.DELETE)
+  @PostMapping("delete")
   public String deleteToDo(@RequestParam("todoId") long id){
     service.deleteToDoItem(id);
     return ViewNames.REDIRECT;
