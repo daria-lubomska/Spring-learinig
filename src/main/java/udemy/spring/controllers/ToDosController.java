@@ -1,10 +1,13 @@
 package udemy.spring.controllers;
 
+import java.time.LocalDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,12 +54,12 @@ public class ToDosController {
   }
 
   @PostMapping("save")
-  public String saveToDo(ToDo toDo){
+  public String saveToDo(@ModelAttribute("newToDo")ToDo toDo){
     service.addToDoItem(toDo);
     return ViewNames.REDIRECT;
   }
 
-  @PostMapping("delete")
+  @GetMapping("delete")
   public String deleteToDo(@RequestParam("todoId") long id){
     service.deleteToDoItem(id);
     return ViewNames.REDIRECT;

@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -30,6 +31,7 @@ public class ToDo {
   private String details;
 
   @Column(name="deadline")
+  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
   private LocalDateTime deadline;
 
   public ToDo(){

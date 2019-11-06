@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="udemy.spring.util.Mappings" %>
+<%@ page import="udemy.spring.util.ViewNames" %>
 <html>
 <head>
     <title>Todo Items</title>
@@ -13,8 +15,8 @@
             <h3 class="text-center">TODO'S Management</h3>
             <hr/>
 
-            <input type="button" value="Add Customer"
-                   onclick="window.location.href='add-toDo-form'; return false;"
+            <input type="button" value="Add TODO"
+                   onclick="window.location.href='add-todo-form'; return false;"
                    class="btn btn-primary"/> <br/>
             <br/>
             <div class="panel panel-info">
@@ -28,16 +30,14 @@
                             <th>Title</th>
                             <th>Details</th>
                             <th>Deadline</th>
+                            <th>Action</th>
                         </tr>
                         <c:forEach var="items" items="${todos}">
-
-                            <!-- construct an "update" link with todo request parameter -->
-                            <c:url var="UPDATE" value="/todos/update-todo-form">
-                                <c:param name="todoId" value="${items.id}"/>
+                            <c:url var="updateLink" value="/todos/update-todo-form">
+                                <c:param name="todoId" value="${items.id}" />
                             </c:url>
-
                             <!-- construct an "delete" link with todo request parameter -->
-                            <c:url var="DELETE" value="/todos/delete">
+                            <c:url var="deleteLink" value="/todos/delete">
                                 <c:param name="todoId" value="${items.id}"/>
                             </c:url>
 
@@ -45,12 +45,12 @@
                                 <td>${items.id}</td>
                                 <td>${items.title}</td>
                                 <td>${items.details}</td>
-                                <td>${items.deadline}</td
+                                <td>${items.deadline}</td>
 
                                 <td>
-                                    <!-- display the update link --> <a href="${DELETE}">Update</a>
-                                    | <a href="${DELETE}"
-                                         onclick="if (!(confirm('Are you sure you want to delete this todo item?'))) return false">DELETE</a>
+                                    <!-- display the update link --> <a href="${updateLink}">Update</a>
+                                    | <a href="${deleteLink}"
+                                         onclick="if (!(confirm('Are you sure you want to delete this todo item?'))) return false">Delete</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="footer">
-        <h5 class="text-center">&copy; Copyright 2019 spring.learning.damon</h5>
+        <h5 class="text-center">&copy; Copyright 2019 spring.learning.wildpig</h5>
     </div>
 </body>
 </html>
