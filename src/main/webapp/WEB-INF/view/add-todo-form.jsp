@@ -20,9 +20,9 @@
             </div>
             <div class="panel-body">
                 <form:form action="save" cssClass="form-horizontal"
-                           method="post" modelAttribute="todo">
+                           method="post" modelAttribute="toDoToProcess">
 
-                    <!-- need to associate this data with customer id -->
+                    <!-- need to associate data from ModelAttribute with todo id -->
                     <form:hidden path="id" />
 
                     <div class="form-group">
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="details" class="col-md-3 control-label">Details</label>
                         <div class="col-md-9">
-                            <form:input path="details" cssClass="form-control" />
+                            <form:textarea path="details" cssClass="form-control" />
                         </div>
                     </div>
 
