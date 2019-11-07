@@ -1,5 +1,6 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="udemy.spring.util.Mappings" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +15,20 @@
 <div class="container">
     <div class="col-md-offset-2 col-md-7">
         <h3 class="text-center">TODO'S Management</h3>
+        <hr/>
+        <input type="button" value="BACK"
+               onclick="window.location.href='${Mappings.TODO_ITEMS}'; return false;"
+               class="btn btn-primary"/> <br/>
+        <br/>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Add TODO</div>
             </div>
             <div class="panel-body">
                 <form:form action="save" cssClass="form-horizontal"
-                           method="post" modelAttribute="todo">
+                           method="post" modelAttribute="toDoToProcess">
 
-                    <!-- need to associate this data with customer id -->
+                    <!-- need to associate data from ModelAttribute with todo id -->
                     <form:hidden path="id" />
 
                     <div class="form-group">
@@ -34,7 +40,7 @@
                     <div class="form-group">
                         <label for="details" class="col-md-3 control-label">Details</label>
                         <div class="col-md-9">
-                            <form:input path="details" cssClass="form-control" />
+                            <form:textarea path="details" cssClass="form-control" />
                         </div>
                     </div>
 

@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="udemy.spring.util.Mappings" %>
-<%@ page import="udemy.spring.util.ViewNames" %>
+<%@ page import="udemy.spring.util.AttributeNames" %>
 <html>
 <head>
     <title>Todo Items</title>
@@ -15,10 +15,17 @@
             <h3 class="text-center">TODO'S Management</h3>
             <hr/>
 
+            <div class="input-group">
             <input type="button" value="Add TODO"
-                   onclick="window.location.href='add-todo-form'; return false;"
+                   onclick="window.location.href='${Mappings.ADD_TODO_FORM}'; return false;"
                    class="btn btn-primary"/> <br/>
             <br/>
+            <input type="button" value="HOME"
+                        onclick="window.location.href='/todo-list'; return false;"
+                        class="btn btn-primary"/> <br/>
+            <br/>
+            </div>
+
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <div class="panel-title">TODO List</div>
@@ -28,27 +35,28 @@
                         <tr>
                             <th>Id</th>
                             <th>Title</th>
-                            <th>Details</th>
-                            <th>Deadline</th>
                             <th>Action</th>
                         </tr>
                         <c:forEach var="items" items="${todos}">
-                            <c:url var="updateLink" value="/todos/update-todo-form">
-                                <c:param name="todoId" value="${items.id}" />
+                            <c:url var="updateLink" value="${Mappings.UPDATE_TODO_FORM}">
+                                <c:param name="${AttributeNames.TODO_ID}" value="${items.id}" />
                             </c:url>
                             <!-- construct an "delete" link with todo request parameter -->
-                            <c:url var="deleteLink" value="/todos/delete">
-                                <c:param name="todoId" value="${items.id}"/>
+                            <c:url var="deleteLink" value="delete">
+                                <c:param name="${AttributeNames.TODO_ID}" value="${items.id}"/>
+                            </c:url>
+                            <c:url var="viewLink" value="${Mappings.VIEW_TODO}">
+                                <c:param name="${AttributeNames.TODO_ID}" value="${items.id}" />
                             </c:url>
 
                             <tr>
                                 <td>${items.id}</td>
                                 <td>${items.title}</td>
-                                <td>${items.details}</td>
-                                <td>${items.deadline}</td>
 
                                 <td>
-                                    <!-- display the update link --> <a href="${updateLink}">Update</a>
+                                    <!-- display the view/update/delete link -->
+                                    <a href="${viewLink}">View</a> |
+                                    <a href="${updateLink}">Update</a>
                                     | <a href="${deleteLink}"
                                          onclick="if (!(confirm('Are you sure you want to delete this todo item?'))) return false">Delete</a>
                                 </td>
