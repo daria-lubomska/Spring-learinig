@@ -19,7 +19,7 @@
     <hibernate.version>5.4.8.Final</hibernate.version>
     <hibernate.validator>6.1.0.Final</hibernate.validator>
     <sping-data.version>2.2.0.RELEASE</sping-data.version>
-    <postgresql.version>42.2.8</postgresql.version>
+    <postgresql.version>42.3.3</postgresql.version>
     <jstl.version>1.2.2</jstl.version>
     <tld.version>1.1.2</tld.version>
 
